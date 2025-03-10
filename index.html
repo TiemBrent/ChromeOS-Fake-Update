@@ -1,0 +1,108 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome OS Update Simulation</title>
+    <style>
+        :root {
+            --spinner-background-color: #0000;
+            --spinner-main-color: #fff;
+            --spinner-gray: #808080;
+            --number-of-sectors: 12;
+            --spinner-width: 9.5px;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full height of the viewport */
+            margin: 0;
+            background-color: #1f1f1f; /* Set the same gray background */
+            font-family: Arial, sans-serif;
+        }
+        .update-screen {
+            text-align: center;
+            background-color: #1f1f1f; /* Dark background for the update screen */
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            width: 400px; /* Set a fixed width for the update screen */
+            /* Removed box-shadow */
+        }
+        .chrome-os-main-section {
+            position: relative;
+        }
+        .corner-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .chrome-os-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .spinner-container {
+            position: relative;
+            width: 56px;
+            height: 56px;
+            aspect-ratio: 1;
+            margin: 0 auto;
+        }
+        .spinner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            padding: 1.4px;
+        }
+        .spinner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: var(--spinner-gray);
+            -webkit-mask: repeating-conic-gradient(#0000 0deg, #000 1deg 20deg, #0000 24deg 30deg), radial-gradient(farthest-side, #0000 calc(100% - var(--spinner-width)), #000 calc(100% - var(--spinner-width)));
+            mask-composite: intersect;
+        }
+        .spinner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            padding: 1.4px;
+            background: conic-gradient(#0000 58.35%, #fff, #e0e0e0) content-box;
+            -webkit-mask: repeating-conic-gradient(#0000 0deg, #000 1deg 20deg, #0000 24deg 30deg), radial-gradient(farthest-side, #0000 calc(100% - var(--spinner-width)), #000 calc(100% - var(--spinner-width)));
+            mask-composite: intersect;
+            animation: spin 1.2s infinite steps(12);
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(1turn);
+            }
+        }
+        .chrome-os-main-text {
+            font-size: 16px;
+            color: #fff; /* White text for better visibility */
+        }
+    </style>
+</head>
+<body>
+    <div class="update-screen">
+        <div class="chrome-os-main-section">
+            <div class="corner-label">
+                <img class="chrome-os-logo" src="https://www.google.com/chrome/static/images/chrome-logo.svg" alt="Chrome OS Logo">
+                <span>chromeOS</span>
+            </div>
+            <div class="spinner-container">
+                <div class="spinner"></div>
+            </div>
+            <span class="chrome-os-main-text">
+                <span>Firmware updating</span><br><br>
+                <span>Do not turn off or unplug your device while update</span><br>
+                <span>is in progress. This may take a few minutes.</span>
+            </span>
+        </div>
+        <span class="chrome-os-bottom-text"></span>
+    </div>
+
+</body></html>
